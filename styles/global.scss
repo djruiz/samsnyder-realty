@@ -1,0 +1,38 @@
+$primary: #0024A1;
+$secondary: #FFA487;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary
+);
+
+.btn-gradient-primary {
+    background-color: #0024A1;
+    background-image: linear-gradient(150deg, $primary -80px, $secondary calc(100% + 80px));
+    transition: linear .5s;
+    border: none !important;
+    position: relative;
+    z-index: 100;
+
+    &:before {
+        border-radius: inherit;
+        background-image: linear-gradient(150deg, $primary, $secondary);
+        content: '';    
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0; left: 0;
+        opacity: 0;
+        width: 100%;
+        z-index: -100;
+        transition: opacity 0.45s;
+      }
+
+    &:hover {
+        &:before {
+            opacity: 1;
+        }
+    }
+}
+
+@import "node_modules/bootstrap/scss/bootstrap";
