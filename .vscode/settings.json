@@ -1,8 +1,10 @@
 {
-    "files.exclude": {
-        "**/.git": false
-   },
-   "files.associations": {
+  "files.exclude": {
+    "**/.git": false
+  },
+  "files.associations": {
     "**/.git/hooks/**": "typescript",
-  }
+  },
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2
 }

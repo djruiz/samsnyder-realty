@@ -1,11 +1,25 @@
 import type { NextPage } from 'next'
+import { Headline } from 'components/headline';
+import { Headshot, headshotColClasses } from 'components/headshot';
+import { Col } from 'react-bootstrap';
+import { Backdrop } from 'components/backdrop';
+import { HomeValueLeadGenForm } from 'components/home-value-lead-gen-form';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <button className='btn btn-primary btn-gradient-primary btn-lg px-5'>
-        Get My Home Value
-      </button>
+      <Headline>
+        <Col xs={12} md={5} className={headshotColClasses}>
+          <Headshot />
+        </Col>
+        <Col xs={12} md={7}>
+          <Backdrop>
+            <HomeValueLeadGenForm />
+          </Backdrop>
+        </Col>
+      </Headline>
+      <div className='bg-white position-relative' style={{ minHeight: "100px", zIndex: 1 }}>
+      </div>
     </div>
   )
 }
