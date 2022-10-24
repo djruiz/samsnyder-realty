@@ -5,7 +5,7 @@ import HeadshotImage from "assets/headshot.png";
 export const Headshot: Component = () => {
   return (
     <div className='drop-shadow position-relative' style={{ bottom: "-10px", zIndex: 0 }}>
-      <Image width={822} height={804} src={HeadshotImage} />
+      <Image width={411} height={402} src={HeadshotImage} />
     </div>
   )
 }

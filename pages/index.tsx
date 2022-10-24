@@ -1,30 +1,27 @@
 import type { NextPage } from "next";
 import { Headline } from "components/headline";
 import { Headshot, headshotColClasses } from "components/headshot";
-import { Col } from "react-bootstrap";
 import { Backdrop } from "components/backdrop";
 import { HomeValueLeadGenForm } from "components/home-value-lead-gen-form";
+import { Overlay } from "components/overlay";
+import { Page } from "components/page";
+import { Section } from "components/section";
 import { About } from "components/about";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Page>
       <Headline>
-        <Col xs={12} md={5} className={headshotColClasses}>
+        <Section def={[12, 12]} md={[6, 6]} classNames={[headshotColClasses]}>
           <Headshot />
-        </Col>
-        <Col xs={12} md={7}>
           <Backdrop>
             <HomeValueLeadGenForm />
           </Backdrop>
-        </Col>
+        </Section>
       </Headline>
-      <div
-        className="bg-white position-relative"
-        style={{ minHeight: "100px", zIndex: 1 }}
-      ></div>
+      <Overlay></Overlay>
       <About />
-    </div>
+    </Page>
   );
 };
 
