@@ -4,6 +4,7 @@ import { InstagramEmbed } from "react-social-media-embed";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import content from "assets/content";
 
 export const About: Component = () => {
   return (
@@ -27,19 +28,9 @@ export const About: Component = () => {
               <h1>About Sam</h1>
               <h2>
                 <span style={{ fontSize: "50px" }}>"</span>
-                Fort Wayne has been my home my entire life.
+                {content.about.heading}
               </h2>
-              <p>
-                I began my career in 2016, and in that time I have been through{" "}
-                <b>thousands of homes</b> and have been involved in{" "}
-                <b>hundreds of real estate transactions.</b>{" "}
-              </p>
-              <p>
-                I focus on <b>simplifying</b> the home buying and selling
-                process to maximize results. My systems and processes help avoid
-                headaches and get my clients the best terms possible.{" "}
-                <b>I am confident that I can exceed your expectations.</b>
-              </p>
+              <div>{content.about.body}</div>
               <a>
                 <button
                   className="p-2 rounded"
@@ -50,7 +41,7 @@ export const About: Component = () => {
                     border: "none",
                   }}
                 >
-                  <FontAwesomeIcon icon={faCalendarDays as IconProp} /> Schedule
+                  <FontAwesomeIcon className="pe-2" icon={faCalendarDays as IconProp} /> Schedule
                   a Chat
                 </button>
               </a>
