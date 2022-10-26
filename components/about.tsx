@@ -13,9 +13,9 @@ export const About: Component = () => {
         backgroundImage: "linear-gradient(135deg, #011A41, #5A77DE)",
       }}
     >
-      <div className="m-auto" style={{ maxWidth: "1300px" }}>
-        <Row>
-          <Col sm={12} md={{ span: 6, order: 2 }}>
+      <div className="m-auto p-5" style={{ maxWidth: "1300px" }}>
+        <Row className="flex-row-reverse">
+          <Col sm={12} md={{ span: 7, order: 2 }}>
             <div
               className="p-4 m-4 rounded shadow"
               style={{
@@ -30,7 +30,7 @@ export const About: Component = () => {
                 <span style={{ fontSize: "50px" }}>"</span>
                 {content.about.heading}
               </h2>
-              <div>{content.about.body}</div>
+              <div style={{ fontSize: 18 }}>{content.about.body}</div>
               <a>
                 <button
                   className="px-3 py-2 rounded"
@@ -39,7 +39,7 @@ export const About: Component = () => {
                     borderRadius: "5%",
                     color: "#D88C74",
                     border: "none",
-                    fontSize: 18
+                    fontSize: 20
                   }}
                 >
                   <FontAwesomeIcon className="pe-2" icon={faCalendarDays as IconProp} /> Schedule
@@ -50,10 +50,10 @@ export const About: Component = () => {
           </Col>
           <Col
             sm={12}
-            md={{ span: 6, order: 1 }}
+            md={{ span: 5, order: 1 }}
             style={{ alignSelf: "center" }}
           >
-            <div className="p-4" style={{}}>
+            <div className="m-4">
               <InstagramEmbed
                 url={"https://www.instagram.com/yourlocalexpertsam/"}
                 width={"100%"}
