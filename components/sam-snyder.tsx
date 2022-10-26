@@ -4,7 +4,7 @@ import { Quotes } from "./quotes"
 
 export const SamSnyder = () => {
   return (
-    <div>
+    <div className="pb-5">
       <div className='text-center'>
         <h1 className="text-primary m-0">Sam Snyder</h1>
         <FiveStars />
