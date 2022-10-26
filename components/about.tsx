@@ -33,12 +33,13 @@ export const About: Component = () => {
               <div>{content.about.body}</div>
               <a>
                 <button
-                  className="p-2 rounded"
+                  className="px-3 py-2 rounded"
                   style={{
                     backgroundColor: "white",
                     borderRadius: "5%",
                     color: "#D88C74",
                     border: "none",
+                    fontSize: 18
                   }}
                 >
                   <FontAwesomeIcon className="pe-2" icon={faCalendarDays as IconProp} /> Schedule
