@@ -5,17 +5,17 @@ export const ContactInfo: Component = () => {
   return (
     <Row className={formGutterClasses}>
       <Col xs={6} md={4}>
-        <FormControl {...text("First Name")} />
+        <FormControl type="text" placeholder="First Name" />
       </Col>
       <Col xs={6} md={4}>
-        <FormControl {...text("Last Name")} />
+        <FormControl type="text" placeholder="Last Name" />
       </Col>
       <Col xs={12} md={4}>
-        <FormControl {...text("Email")} />
+        <FormControl type="email" name="email" placeholder="Email" />
       </Col>
     </Row>
   )
 }
 
 const text = (title: string) => ({ placeholder: title, type: "text", className: "p-2" })
-const formGutterClasses = ["gx-2", "gy-2", "gy-md-0"].join(" ")
+const formGutterClasses = ["gx-2", "gy-4", "gy-md-0"].join(" ")

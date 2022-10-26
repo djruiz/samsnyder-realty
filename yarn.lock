@@ -1744,6 +1744,11 @@ react-bootstrap@^2.5.0:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
+react-cool-onclickoutside@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-cool-onclickoutside/-/react-cool-onclickoutside-1.7.0.tgz#abc844e14852220fe15f81d7ef44976d15cd9980"
+  integrity sha512-HVZK2155Unee+enpoHKyYP2UdQK69thw90XAOUCjvJBcgRSgfRPgWWt/W1dYzoGp3+nleAa8SJxF1d4FMA4Qmw==
+
 react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
@@ -2117,6 +2122,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-places-autocomplete@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/use-places-autocomplete/-/use-places-autocomplete-4.0.0.tgz#3865636e7fb6e28dbbddc95a780528b84f94bb86"
+  integrity sha512-w8jdm1iT3WXN0DPXtgyccJoBlAk/UetCMg466B2pBiWNBfvAIxdRoU6Gt4CzW11rWWuzpqnMG5hLxUOKSZBSgw==
 
 use-sync-external-store@1.2.0:
   version "1.2.0"

@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   return (
     <Page>
       <Headline>
-        <Section def={[12, 12]} md={[6, 6]} classNames={[headshotColClasses]}>
+        <Section def={[12, 12]} md={[5, 7]} classNames={[headshotColClasses]}>
           <Headshot />
           <Backdrop>
             <HomeValueLeadGenForm />

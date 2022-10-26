@@ -6,6 +6,10 @@ $theme-colors: (
   "secondary": $secondary
 );
 
+.pointer {
+  cursor: pointer
+}
+
 .bg-dark-transparent {
   background-color: #000000C0
 }

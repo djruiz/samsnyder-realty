@@ -6,6 +6,7 @@ const Document = () => {
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
         <title>Sam Snyder Realtor</title>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUkaMW__Jh-cNULHhsTQ3z9vcWbbGEkAs&libraries=places"></script>
       </Head>
       <body>
         <Main />
