@@ -1,7 +1,7 @@
 import { FiveStars } from "./five-stars"
 import { Fullshot } from "./fullshot"
 import { Quotes } from "./quotes"
-import content from "assets/content.json"
+import content from "assets/content"
 
 export const SamSnyder = () => {
   return (

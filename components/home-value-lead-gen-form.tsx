@@ -1,4 +1,4 @@
-import content from "assets/content.json"
+import content from "assets/content"
 import { Form, Button } from "react-bootstrap"
 import { Component } from "types/component"
 import { Address } from "./address"
