@@ -7,7 +7,7 @@ $theme-colors: (
 );
 
 .bg-dark-transparent {
-  background-color: #000000D0;
+  background-color: #000000C0
 }
 
 .mw-1100 {
@@ -15,7 +15,7 @@ $theme-colors: (
 }
 
 .drop-shadow {
-  filter: drop-shadow(0 0 10px #000000A0);
+  filter: drop-shadow(0 0 2px #000000A0);
 }
 
 .btn-gradient-primary {

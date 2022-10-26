@@ -6,6 +6,10 @@ import { HomeValueLeadGenForm } from 'components/home-value-lead-gen-form';
 import { Overlay } from 'components/overlay';
 import { Page } from 'components/page';
 import { Section } from 'components/section';
+import Image from "next/image";
+import FullshotImage from "assets/fullshot.png";
+import { Corners } from 'components/corners';
+import { SamSnyder } from 'components/sam-snyder';
 
 const Home: NextPage = () => {
   return (
@@ -19,9 +23,15 @@ const Home: NextPage = () => {
         </Section>
       </Headline>
       <Overlay>
-
+        <Corners>
+          <Section className="pt-5 mw-1100 m-auto">
+            <SamSnyder />
+            <div>
+            </div>
+          </Section>
+        </Corners>
       </Overlay>
-    </Page>
+    </Page >
   )
 }
 

@@ -8,9 +8,10 @@ interface Props {
   md?: number[],
   lg?: number[],
   classNames?: string[],
+  className?: string
 }
 
-export const Section: Component<Props> = ({ children, def, sm, md, lg, classNames }) => {
+export const Section: Component<Props> = ({ children, def, sm, md, lg, classNames, className }) => {
   const columns = children || [];
 
   const layout = {
@@ -28,5 +29,5 @@ export const Section: Component<Props> = ({ children, def, sm, md, lg, className
     className: classNames?.[i]
   });
 
-  return <Row>{React.Children.map(columns, (col, i) => <Col {...getLayout(i)}>{col}</Col>)}</Row>
+  return <Row className={className}>{React.Children.map(columns, (col, i) => <Col {...getLayout(i)}>{col}</Col>)}</Row>
 }
