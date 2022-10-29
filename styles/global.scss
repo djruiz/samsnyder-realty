@@ -22,6 +22,52 @@ $theme-colors: (
   filter: drop-shadow(0 0 2px #000000A0);
 }
 
+.home-value-ff {
+  margin: auto;
+  
+}
+
+.esv-container {
+  background-image: linear-gradient(150deg, #FF9B7B -80px, #011A4151 calc(100% + 80px));
+}
+
+.esv-data {
+  background-image: linear-gradient(150deg, #010741 -80px, #5A77DE calc(100% + 80px));
+  color: #fff;
+  padding: 20px;
+}
+
+.esv-value {
+  font-size: 28px;
+}
+
+.pricing-status {
+  font-size: 36px
+}
+
+#address {
+  font-size: 16px;
+}
+
+#house-desc {
+  font-size: 16px;
+}
+
+.home-desc {
+  background-color: #00000075;
+  color: white;
+  padding: 20px;
+}
+
+.home-pic {
+  max-width: 400px;
+  margin: auto;
+}
+
+.cta-copy {
+  padding: 20px;
+}
+
 .btn-gradient-primary {
   background-color: #0024A1;
   background-image: linear-gradient(150deg, $primary -80px, $secondary calc(100% + 80px));
@@ -51,5 +97,23 @@ $theme-colors: (
     }
   }
 }
+
+.sold-date {
+  font-size: 16px;
+}
+
+.home-desc {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .home-pic {
+    margin-top: 1.5rem;
+  }
+  .home-desc {
+    margin-top: 0;
+  }
+ }
 
 @import "node_modules/bootstrap/scss/bootstrap";

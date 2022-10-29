@@ -1,5 +1,5 @@
-import { Corners } from 'components/corners';
-import { SamSnyder } from 'components/sam-snyder';
+import { Corners } from "components/corners";
+import { SamSnyder } from "components/sam-snyder";
 import type { NextPage } from "next";
 import { Headline } from "components/headline";
 import { Headshot, headshotColClasses } from "components/headshot";
@@ -25,8 +25,7 @@ const Home: NextPage = () => {
         <Corners>
           <Section className="pt-5 mw-1100 m-auto">
             <SamSnyder />
-            <div>
-            </div>
+            <div></div>
           </Section>
         </Corners>
       </Overlay>
