@@ -1,13 +1,16 @@
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+import usePlacesAutocomplete from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { ChangeEvent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { Component } from "types/component";
+import { ErrorMessage, Field, useField } from "formik";
 
-export const Address = () => {
+interface Props {
+  onChange?: (value: String) => void
+}
+
+export const Address: Component<Props> = () => {
   const {
     ready,
     value,
@@ -20,6 +23,7 @@ export const Address = () => {
     },
     debounce: 300,
   });
+  const [, , helpers] = useField({ name: "homeAddress" });
   const ref = useOnclickOutside(() => {
     // When user clicks outside of the component, we can dismiss
     // the searched suggestions by calling this method
@@ -29,6 +33,7 @@ export const Address = () => {
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     // Update the keyword of the input element
     setValue(e.target.value);
+    helpers.setValue(e.target.value)
   };
 
   const handleSelect = ({ description }: any) =>
@@ -36,6 +41,7 @@ export const Address = () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
       setValue(description, false);
+      helpers.setValue(description);
       clearSuggestions();
     };
 
@@ -58,13 +64,15 @@ export const Address = () => {
 
   return (
     <div style={{ zIndex: 2 }} ref={ref} className="position-relative">
-      <input
+      <Field
+        name="homeAddress"
         className="form-control my-2"
         value={value}
         onChange={handleInput}
         disabled={!ready}
         placeholder="Home Address"
       />
+      <ErrorMessage name="homeAddress" className="text-danger" component="small" />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && <ul className="list-group text-start mt-1 position-absolute w-100">{renderSuggestions()}</ul>}
     </div>
