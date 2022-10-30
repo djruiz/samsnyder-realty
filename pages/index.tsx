@@ -1,5 +1,5 @@
-import { Corners } from 'components/corners';
-import { SamSnyder } from 'components/sam-snyder';
+import { Corners } from "components/corners";
+import { SamSnyder } from "components/sam-snyder";
 import type { NextPage } from "next";
 import { Headline } from "components/headline";
 import { Headshot, headshotColClasses } from "components/headshot";
