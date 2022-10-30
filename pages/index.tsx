@@ -9,6 +9,7 @@ import { Overlay } from "components/overlay";
 import { Page } from "components/page";
 import { Section } from "components/section";
 import { About } from "components/about";
+import { GoogleReviews } from 'components/google-reviews';
 
 const Home: NextPage = () => {
   return (
@@ -23,10 +24,9 @@ const Home: NextPage = () => {
       </Headline>
       <Overlay>
         <Corners>
-          <Section className="pt-5 mw-1100 m-auto">
+          <Section def={[12, 12]} md={[6, 6]} className="pt-5 mw-1100 m-auto">
             <SamSnyder />
-            <div>
-            </div>
+            <GoogleReviews />
           </Section>
         </Corners>
       </Overlay>
