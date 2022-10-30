@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
-export const Value = () => {
+export const Home = () => {
   return (
     <div className="pb-5 home-value-ff">
       <div className="esv-container">

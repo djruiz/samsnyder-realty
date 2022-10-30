@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import { Page } from "components/page";
-import { Value } from "components/value";
+import { Home } from "components/home";
 
 const HomeValue: NextPage = () => {
   return (
     <Page>
-      <Value />
+      <Home />
     </Page>
   );
 };
