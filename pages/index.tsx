@@ -9,10 +9,14 @@ import { Overlay } from "components/overlay";
 import { Page } from "components/page";
 import { Section } from "components/section";
 import { About } from "components/about";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
     <Page>
+      <Head>
+        <title>Sam Snyder Realtor</title>
+      </Head>
       <Headline>
         <Section def={[12, 12]} md={[5, 7]} classNames={[headshotColClasses]}>
           <Headshot />

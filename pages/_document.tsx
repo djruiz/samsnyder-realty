@@ -1,11 +1,10 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from "next/document";
 
 const Document = () => {
   return (
     <Html>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
-        <title>Sam Snyder Realtor</title>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUkaMW__Jh-cNULHhsTQ3z9vcWbbGEkAs&libraries=places"></script>
       </Head>
       <body>
@@ -13,7 +12,7 @@ const Document = () => {
         <NextScript />
       </body>
     </Html>
-  )
-}
+  );
+};
 
-export default Document
+export default Document;
