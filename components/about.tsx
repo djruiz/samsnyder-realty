@@ -50,7 +50,6 @@ export const About: Component = () => {
                 </button>
               </a>
             </div>
-            ''
           </Col>
           <Col
             sm={12}

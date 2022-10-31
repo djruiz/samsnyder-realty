@@ -5,7 +5,10 @@ const Document = () => {
     <Html>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUkaMW__Jh-cNULHhsTQ3z9vcWbbGEkAs&libraries=places"></script>
+        <script
+          async
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUkaMW__Jh-cNULHhsTQ3z9vcWbbGEkAs&libraries=places"
+        ></script>
       </Head>
       <body>
         <Main />
