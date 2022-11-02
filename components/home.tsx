@@ -40,7 +40,7 @@ export const Home = () => {
   const router = useRouter();
 
   function numberWithCommas(x: number) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   async function handleNewLead(firstName: string, lastName: string, email: string, propertyKey: string) {
