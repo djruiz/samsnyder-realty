@@ -27,7 +27,7 @@ export const About: Component = () => {
             >
               <h1>About Sam</h1>
               <h2>
-                <span style={{ fontSize: "50px" }}>"</span>
+                <span style={{ fontSize: "50px" }}>&quot;</span>
                 {content.about.heading}
               </h2>
               <div style={{ fontSize: 18 }}>{content.about.body}</div>
@@ -39,11 +39,14 @@ export const About: Component = () => {
                     borderRadius: "5%",
                     color: "#D88C74",
                     border: "none",
-                    fontSize: 20
+                    fontSize: 20,
                   }}
                 >
-                  <FontAwesomeIcon className="pe-2" icon={faCalendarDays as IconProp} /> Schedule
-                  a Chat
+                  <FontAwesomeIcon
+                    className="pe-2"
+                    icon={faCalendarDays as IconProp}
+                  />{" "}
+                  Schedule a Chat
                 </button>
               </a>
             </div>
