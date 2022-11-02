@@ -52,8 +52,6 @@ export const Address: Component<Props> = () => {
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
 
-      console.log(suggestion);
-
       return (
         <li key={place_id} onClick={handleSelect(suggestion)} className="w-100 py-2 bg-light list-group-item m-0 pointer" style={{ listStyle: "none", zIndex: 2 }}>
           <span className="text-primary me-2"><FontAwesomeIcon icon={faHouse} /></span>

@@ -25,7 +25,7 @@ export const HomeValueLeadGenForm: Component = () => {
   const router = useRouter();
 
   function handleSubmit({ email, firstName, lastName, homeAddress }: Schema) {
-    const url = `/home-value?email=${email}&firstName=${firstName}&lastName=${lastName}&homeAddress=${homeAddress}`;
+    const url = `/home-value?email=${email}&firstName=${firstName}&lastName=${lastName}&propertyKey=${homeAddress}`;
     router.push(url);
   }
 
