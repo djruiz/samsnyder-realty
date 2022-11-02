@@ -10,6 +10,7 @@ import { Page } from "components/page";
 import { Section } from "components/section";
 import { About } from "components/about";
 import { GoogleReviews } from 'components/google-reviews';
+import React from "react";
 
 const Home: NextPage = () => {
   return (

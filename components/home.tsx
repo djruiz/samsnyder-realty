@@ -1,10 +1,8 @@
 import { Fullshot } from "./fullshot";
 import { Col, Row } from "react-bootstrap";
-import Placeholder from "assets/placeholder.webp";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
@@ -17,9 +15,23 @@ import React from "react";
 import { Chart } from "react-google-charts";
 import { Section } from "./section";
 import GoogleMapReact from 'google-map-react';
+import { ImageCarousel } from "./image-carousel";
 
 type LeadCache = string[];
-type PropertyCache = { [key: string]: PropertyDetailsResponse };
+
+interface Props {
+  lat: number,
+  lng: number
+}
+
+const Marker = (_: Props) => {
+  return (
+    <>
+      <div className="pin"></div>
+      <div className="pulse"></div>
+    </>
+  )
+}
 
 export const Home = () => {
   const [cookies, setCookie] = useCookies(["__leads"]);
@@ -89,10 +101,6 @@ export const Home = () => {
     handlePageLoad();
   }, [router.isReady, router.query])
 
-  useEffect(() => {
-    console.log(property)
-  }, [property])
-
   return (
     <div className="pb-5 home-value-ff">
       <div style={{ minHeight: "100vh" }} className="esv-container px-4">
@@ -115,15 +123,57 @@ export const Home = () => {
           <Row>
             <Col sm={12} md={{ span: 6 }}>
               <div>
-                <div className="rounded shadow position-relative" style={{ height: 400, overflow: "hidden" }}>
-                  <Image layout="fill" objectFit="cover" src={Placeholder} />
-                </div>
+                <ImageCarousel images={property.data.property_detail.photos.map(p => p.href)} />
               </div>
             </Col>
             <Col sm={12} md={{ span: 6 }}>
-              <div className="esv-data rounded shadow mb-4">
-                <h1 className="esv-value fs-2">Estimated Property Value</h1>
-                <h2 className="pricing-status">${numberWithCommas(property.data.property_detail.avm.value_low)} - ${numberWithCommas(property.data.property_detail.avm.value_high)}</h2>
+              <div className="position-relative esv-data rounded shadow mb-5 overflow-hidden" style={{ paddingBottom: 30 }}>
+                <div className="p-4">
+                  <h1 className="esv-value fs-2">Estimated Property Value</h1>
+                  <hr />
+                  <small className="font-monospace">Best Estimate</small>
+                  <h2>${numberWithCommas(property.data.property_detail.avm.value)}</h2>
+                  <div>
+                    <small className="font-monospace">Value Range</small>
+                    <h5>${numberWithCommas(property.data.property_detail.avm.value_low)} - ${numberWithCommas(property.data.property_detail.avm.value_high)}</h5>
+                  </div>
+                </div>
+                <div className="position-absolute bg-white text-primary w-100 text-center d-flex justify-content-center py-2" style={{ bottom: 0 }}>
+                  <div className="me-2">
+                    <FontAwesomeIcon icon={faCalendar} />
+                  </div>
+                  <p className="m-0">Evaluated on {property.data.property_detail.avm.valuation_date.slice(0, 4) + "-" + property.data.property_detail.avm.valuation_date.slice(4, 6) + "-" + property.data.property_detail.avm.valuation_date.slice(6, 8)}</p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <div className="mt-4">
+            <div className="mt-4 shadow rounded overflow-hidden" style={{ height: '300px', width: '100%' }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{ key: "AIzaSyDUkaMW__Jh-cNULHhsTQ3z9vcWbbGEkAs" }}
+                defaultCenter={{
+                  lat: property.data.property_detail.address.location.lat,
+                  lng: property.data.property_detail.address.location.lon
+                }}
+                defaultZoom={13}
+              >
+                <Marker lng={property.data.property_detail.address.location.lon} lat={property.data.property_detail.address.location.lat} />
+              </GoogleMapReact>
+            </div>
+          </div>
+          <Section>
+            <div className="my-4 p-4 border border-primary shadow rounded text-center" style={{ backgroundColor: "#FFFFFF40" }}>
+              <h1 className="fs-4 font-monospace text-primary">Transaction History</h1>
+              <div>{property.data.property_detail.property_history.map(event => <div key={event.iso_date}>
+                <hr />
+                <small className="m-0 mb-2 text-primary"><b>{event.date}</b></small>
+                <h5 className="d-flex justify-content-center"><span>{event.event_name}</span><span className="text-primary mx-2">|</span> <span>${numberWithCommas(event.price)}</span></h5>
+              </div>)}</div>
+            </div>
+            <div>
+              <div className="border-start border-primary border-4 p-4 mt-4 shadow" style={{ backgroundColor: "#FFFFFF40" }}>
+                <h2 className="fs-4 text-primary font-monospace">Latest Listing</h2>
+                <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.listings[0].description }}></p>
               </div>
               <div className="mt-4 p-4 pt-3 border border-primary rounded shadow" style={{ backgroundColor: "#FFFFFF40" }}>
                 <h2 className="text-monospace pb-3 text-primary fs-5">Important Property Details</h2>
@@ -139,55 +189,34 @@ export const Home = () => {
                   <p className="badge bg-white text-primary border border-primary shadow mx-1">Built in Year {property!.data.property_detail.description.year_built}</p>
                 </div>
               </div>
-            </Col>
-          </Row>
-          <div className="mt-4 shadow rounded overflow-hidden" style={{ height: '300px', width: '100%' }}>
-            <GoogleMapReact
-              defaultCenter={{
-                lat: property.data.property_detail.address.location.lat,
-                lng: property.data.property_detail.address.location.lon
-              }}
-              defaultZoom={16}
-            />
-          </div>
-          <Section>
-            <div className="my-4 p-4 border border-primary shadow rounded text-center" style={{ backgroundColor: "#FFFFFF40" }}>
-              <h1 className="fs-4 font-monospace text-primary">Transaction History</h1>
-              <div>{property.data.property_detail.property_history.map(event => <div>
-                <hr />
-                <small className="m-0 mb-2 text-primary"><b>{event.date}</b></small>
-                <h5 className="d-flex justify-content-center"><span>{event.event_name}</span><span className="text-primary mx-2">|</span> <span>${numberWithCommas(event.price)}</span></h5>
-              </div>)}</div>
-            </div>
-            <div className="border-start border-primary border-4 p-4 mt-4 shadow" style={{ backgroundColor: "#FFFFFF40" }}>
-              <h2 className="fs-4 text-primary font-monospace">Latest Listing</h2>
-              <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.listings[0].description }}></p>
             </div>
           </Section>
-          <div className="border border-primary mt-4 rounded shadow text-center position-relative overflow-hidden">
-            <Chart
-              options={{
-                title: "Property Evaluation History", vAxis: { format: 'currency' }
-              }}
-              chartType="LineChart"
-              data={[["Date", "Value"], ...property.data.property_detail.avm_history.map(h => [h.valuation_date, h.value]).reverse()]}
-              width="100%"
-              height="400px"
-              legendToggle
-            />
-          </div>
-          <div className="border border-primary mt-4 rounded shadow text-center overflow-hidden mb-5">
-            <Chart
-              options={{
-                title: "Property Evaluation Forcast", vAxis: { format: 'currency' }
-              }}
-              chartType="LineChart"
-              data={[["Date", "Value"], ...property.data.property_detail.avm_trend.forecast.map(f => [f.valuation_date, f.value])]}
-              width="100%"
-              height="400px"
-              legendToggle
-            />
-          </div>
+          <Section>
+            <div className="border border-primary mt-4 rounded shadow text-center position-relative overflow-hidden">
+              <Chart
+                options={{
+                  title: "Property Evaluation History", vAxis: { format: 'currency' }
+                }}
+                chartType="LineChart"
+                data={[["Date", "Value"], ...property.data.property_detail.avm_history.map(h => [h.valuation_date, h.value]).reverse()]}
+                width="100%"
+                height="400px"
+                legendToggle
+              />
+            </div>
+            <div className="border border-primary mt-4 rounded shadow text-center overflow-hidden mb-5">
+              <Chart
+                options={{
+                  title: "Property Evaluation Forcast", vAxis: { format: 'currency' }
+                }}
+                chartType="LineChart"
+                data={[["Date", "Value"], ...property.data.property_detail.avm_trend.forecast.map(f => [f.valuation_date, f.value])]}
+                width="100%"
+                height="400px"
+                legendToggle
+              />
+            </div>
+          </Section>
         </div>}
       </div>
       <Row className="mw-1100 m-auto py-5">
