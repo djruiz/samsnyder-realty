@@ -67,7 +67,7 @@ export const Home = () => {
     }
 
     if (!properties[propertyKey]) {
-      if (process.env.NODE_ENV == "production") {
+      if (process.env.NODE_ENV == "production" || process.env.NODE_ENV == "development") {
         console.log("CALLING API");
 
         const locationSuggestion = await Axios.get<LocationSuggestionResponse>("https://us-real-estate.p.rapidapi.com/location/suggest", {
@@ -78,8 +78,15 @@ export const Home = () => {
           }
         });
 
+        const location = locationSuggestion.data.data.find(p => p.area_type == "address");
+
+        if (!location) {
+          setCouldNotFindProperty(true);
+          return;
+        }
+
         const propertyDetails = await Axios.get<PropertyDetailsResponse>("https://us-real-estate.p.rapidapi.com/v2/property-detail", {
-          params: { property_id: locationSuggestion.data.data[0].property_id },
+          params: { property_id: location.property_id },
           headers: {
             'X-RapidAPI-Key': 'e3bd71178bmsh7d000eacc500dbep1b88c5jsn697ea76af05d',
             'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com'
