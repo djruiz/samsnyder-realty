@@ -15,6 +15,8 @@ import { capitalCase } from "change-case";
 import propertyDetailsMock from "__mocks__/property-details-mock";
 import React from "react";
 import { Chart } from "react-google-charts";
+import { Section } from "./section";
+import GoogleMapReact from 'google-map-react';
 
 type LeadCache = string[];
 type PropertyCache = { [key: string]: PropertyDetailsResponse };
@@ -24,6 +26,10 @@ export const Home = () => {
   const [property, setProperty] = useState<PropertyDetailsResponse>();
   const [couldNotFindProperty, setCouldNotFindProperty] = useState<boolean>(false);
   const router = useRouter();
+
+  function numberWithCommas(x: number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   async function handleNewLead(firstName: string, lastName: string, email: string, propertyKey: string) {
     console.log("Creating new lead!", firstName, lastName, email, propertyKey);
@@ -103,7 +109,7 @@ export const Home = () => {
           </div>
           <hr />
           <div className="border-start border-primary border-4 p-4 mb-4 shadow" style={{ backgroundColor: "#FFFFFF40" }}>
-            <h2 className="fs-4 text-primary">Overview</h2>
+            <h2 className="fs-4 text-primary font-monospace">Overview</h2>
             <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.property_overview }}></p>
           </div>
           <Row>
@@ -115,10 +121,9 @@ export const Home = () => {
               </div>
             </Col>
             <Col sm={12} md={{ span: 6 }}>
-              <div className="esv-data rounded mb-4">
-                <h1 className="esv-value">Estimated Home Value</h1>
-                <h2 className="pricing-status">$68,000 - $131,000</h2>
-                <h3 className="sold-date">Sold: $78,769 • On 08/30/21</h3>
+              <div className="esv-data rounded shadow mb-4">
+                <h1 className="esv-value fs-2">Estimated Property Value</h1>
+                <h2 className="pricing-status">${numberWithCommas(property.data.property_detail.avm.value_low)} - ${numberWithCommas(property.data.property_detail.avm.value_high)}</h2>
               </div>
               <div className="mt-4 p-4 pt-3 border border-primary rounded shadow" style={{ backgroundColor: "#FFFFFF40" }}>
                 <h2 className="text-monospace pb-3 text-primary fs-5">Important Property Details</h2>
@@ -136,14 +141,33 @@ export const Home = () => {
               </div>
             </Col>
           </Row>
-          <div className="border-start border-primary border-4 p-4 mt-4 shadow" style={{ backgroundColor: "#FFFFFF40" }}>
-            <h2 className="fs-4 text-primary">Latest Listing</h2>
-            <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.listings[0].description }}></p>
+          <div className="mt-4 shadow rounded overflow-hidden" style={{ height: '300px', width: '100%' }}>
+            <GoogleMapReact
+              defaultCenter={{
+                lat: property.data.property_detail.address.location.lat,
+                lng: property.data.property_detail.address.location.lon
+              }}
+              defaultZoom={16}
+            />
           </div>
+          <Section>
+            <div className="my-4 p-4 border border-primary shadow rounded text-center" style={{ backgroundColor: "#FFFFFF40" }}>
+              <h1 className="fs-4 font-monospace text-primary">Transaction History</h1>
+              <div>{property.data.property_detail.property_history.map(event => <div>
+                <hr />
+                <small className="m-0 mb-2 text-primary"><b>{event.date}</b></small>
+                <h5 className="d-flex justify-content-center"><span>{event.event_name}</span><span className="text-primary mx-2">|</span> <span>${numberWithCommas(event.price)}</span></h5>
+              </div>)}</div>
+            </div>
+            <div className="border-start border-primary border-4 p-4 mt-4 shadow" style={{ backgroundColor: "#FFFFFF40" }}>
+              <h2 className="fs-4 text-primary font-monospace">Latest Listing</h2>
+              <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.listings[0].description }}></p>
+            </div>
+          </Section>
           <div className="border border-primary mt-4 rounded shadow text-center position-relative overflow-hidden">
             <Chart
               options={{
-                title: "Property Value History", vAxis: { format: 'currency' }
+                title: "Property Evaluation History", vAxis: { format: 'currency' }
               }}
               chartType="LineChart"
               data={[["Date", "Value"], ...property.data.property_detail.avm_history.map(h => [h.valuation_date, h.value]).reverse()]}
@@ -152,10 +176,10 @@ export const Home = () => {
               legendToggle
             />
           </div>
-          <div className="border border-primary mt-4 rounded shadow text-center overflow-hidden">
+          <div className="border border-primary mt-4 rounded shadow text-center overflow-hidden mb-5">
             <Chart
               options={{
-                title: "Property Value Forcast", vAxis: { format: 'currency' }
+                title: "Property Evaluation Forcast", vAxis: { format: 'currency' }
               }}
               chartType="LineChart"
               data={[["Date", "Value"], ...property.data.property_detail.avm_trend.forecast.map(f => [f.valuation_date, f.value])]}
