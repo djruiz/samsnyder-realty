@@ -67,7 +67,7 @@ export const Home = () => {
     }
 
     if (!properties[propertyKey]) {
-      if (process.env.NODE_ENV == "production") {
+      if (process.env.NODE_ENV == "production" || process.env.NODE_ENV == "development") {
         console.log("CALLING API");
 
         const locationSuggestion = await Axios.get<LocationSuggestionResponse>("https://us-real-estate.p.rapidapi.com/location/suggest", {
@@ -123,7 +123,7 @@ export const Home = () => {
           <Row>
             <Col sm={12} md={{ span: 6 }}>
               <div>
-                <ImageCarousel images={property.data.property_detail.photos.map(p => p.href)} />
+                <ImageCarousel images={property.data.property_detail.photos?.map(p => p.href)} />
               </div>
             </Col>
             <Col sm={12} md={{ span: 6 }}>
@@ -142,7 +142,7 @@ export const Home = () => {
                   <div className="me-2">
                     <FontAwesomeIcon icon={faCalendar} />
                   </div>
-                  <p className="m-0">Evaluated on {property.data.property_detail.avm.valuation_date.slice(0, 4) + "-" + property.data.property_detail.avm.valuation_date.slice(4, 6) + "-" + property.data.property_detail.avm.valuation_date.slice(6, 8)}</p>
+                  <p className="m-0">Evaluated on {property.data.property_detail.avm.valuation_date?.slice(0, 4) + "-" + property.data.property_detail.avm.valuation_date?.slice(4, 6) + "-" + property.data.property_detail.avm.valuation_date?.slice(6, 8)}</p>
                 </div>
               </div>
             </Col>
@@ -164,16 +164,16 @@ export const Home = () => {
           <Section>
             <div className="my-4 p-4 border border-primary shadow rounded text-center" style={{ backgroundColor: "#FFFFFF40" }}>
               <h1 className="fs-4 font-monospace text-primary">Transaction History</h1>
-              <div>{property.data.property_detail.property_history.map(event => <div key={event.iso_date}>
+              <div>{property.data.property_detail.property_history?.map(event => <div key={event.iso_date}>
                 <hr />
                 <small className="m-0 mb-2 text-primary"><b>{event.date}</b></small>
                 <h5 className="d-flex justify-content-center"><span>{event.event_name}</span><span className="text-primary mx-2">|</span> <span>${numberWithCommas(event.price)}</span></h5>
-              </div>)}</div>
+              </div>) || "[Not Found]"}</div>
             </div>
             <div>
               <div className="border-start border-primary border-4 p-4 mt-4 shadow" style={{ backgroundColor: "#FFFFFF40" }}>
                 <h2 className="fs-4 text-primary font-monospace">Latest Listing</h2>
-                <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.listings[0].description }}></p>
+                <p dangerouslySetInnerHTML={{ __html: property!.data.property_detail.listings?.[0]?.description || "[Not Found]" }}></p>
               </div>
               <div className="mt-4 p-4 pt-3 border border-primary rounded shadow" style={{ backgroundColor: "#FFFFFF40" }}>
                 <h2 className="text-monospace pb-3 text-primary fs-5">Important Property Details</h2>
@@ -192,30 +192,32 @@ export const Home = () => {
             </div>
           </Section>
           <Section>
-            <div className="border border-primary mt-4 rounded shadow text-center position-relative overflow-hidden">
+            {property.data.property_detail.avm_history ? <div className="border border-primary mt-4 rounded shadow text-center position-relative overflow-hidden">
               <Chart
                 options={{
                   title: "Property Evaluation History", vAxis: { format: 'currency' }
                 }}
                 chartType="LineChart"
-                data={[["Date", "Value"], ...property.data.property_detail.avm_history.map(h => [h.valuation_date, h.value]).reverse()]}
+                data={[["Date", "Value"], ...(property.data.property_detail.avm_history || []).map(h => [h.valuation_date, h.value]).reverse()]}
                 width="100%"
                 height="400px"
                 legendToggle
               />
-            </div>
-            <div className="border border-primary mt-4 rounded shadow text-center overflow-hidden mb-5">
-              <Chart
-                options={{
-                  title: "Property Evaluation Forcast", vAxis: { format: 'currency' }
-                }}
-                chartType="LineChart"
-                data={[["Date", "Value"], ...property.data.property_detail.avm_trend.forecast.map(f => [f.valuation_date, f.value])]}
-                width="100%"
-                height="400px"
-                legendToggle
-              />
-            </div>
+            </div> : ""}
+            {property.data.property_detail.avm_trend.forecast ? (
+              <div className="border border-primary bg-white mt-4 rounded shadow text-center overflow-hidden mb-5">
+                <Chart
+                  options={{
+                    title: "Property Evaluation Forcast", vAxis: { format: 'currency' }
+                  }}
+                  chartType="LineChart"
+                  data={[["Date", "Value"], ...(property.data.property_detail.avm_trend.forecast || [])?.map(f => [f.valuation_date, f.value])]}
+                  width="100%"
+                  height="400px"
+                  legendToggle
+                />
+              </div>
+            ) : ""}
           </Section>
         </div>}
       </div>

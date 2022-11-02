@@ -14,7 +14,7 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
 
   function getPreviousImageIndex(behind: number): number {
     if (displayImageIndex < 1) {
-      return images.length - behind
+      return images.length - behind == displayImageIndex ? 9999 : images.length - behind
     } else {
       return displayImageIndex - behind
     }
@@ -28,16 +28,6 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
     }
   }
 
-  function incrementImageIndex() {
-    const i = getFollowingImageIndex(1);
-    setDisplayImageIndex(i);
-  }
-
-  function decrementImageIndex() {
-    const i = getPreviousImageIndex(1);
-    setDisplayImageIndex(i);
-  }
-
   const prev2 = images[getPreviousImageIndex(2)];
   const prev1 = images[getPreviousImageIndex(1)];
   const current = images[displayImageIndex];
@@ -45,6 +35,20 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
   const foll2 = images[getFollowingImageIndex(2)];
 
   const imagePreviews = [prev2, prev1, current, foll1, foll2];
+
+  function incrementImageIndex() {
+    if (!prev1) return;
+
+    const i = getFollowingImageIndex(1);
+    setDisplayImageIndex(i);
+  }
+
+  function decrementImageIndex() {
+    if (!foll1) return;
+
+    const i = getPreviousImageIndex(1);
+    setDisplayImageIndex(i);
+  }
 
   return (
     <div className="rounded shadow position-relative d-flex align-items-center justify-content-center" style={{ height: 400, overflow: "hidden", backgroundColor: "#ccc" }}>
@@ -60,7 +64,7 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
       <Image layout="fill" objectFit="cover" src={current} />
       <div style={{ bottom: 25 }} className="d-flex position-absolute">
         {imagePreviews.map((src, i) => (
-          <div
+          src == undefined ? <span></span> : <div
             key={src}
             style={{ width: 50, height: 50, backgroundColor: "#ccc" }}
             className={"rounded shadow overflow-hidden mx-1 position-relative " + (i == 2 ? "border border-primary" : " border border-secondary")}>
