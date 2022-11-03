@@ -10,7 +10,7 @@ import { Page } from "components/page";
 import { Section } from "components/section";
 import { About } from "components/about";
 import Head from "next/head";
-import { GoogleReviews } from 'components/google-reviews';
+import { GoogleReviews } from "components/google-reviews";
 import React from "react";
 
 const Home: NextPage = () => {
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
       </Headline>
       <Overlay>
         <Corners>
-          <Section def={[12, 12]} md={[6, 6]} className="pt-5 mw-1100 m-auto">
+          <Section def={[12, 12]} md={[6, 6]} className="py-5 mw-1100 m-auto">
             <SamSnyder />
             <GoogleReviews />
           </Section>

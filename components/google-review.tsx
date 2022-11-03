@@ -18,28 +18,23 @@ export const GoogleReview: Component<Props> = ({
   review,
 }) => {
   return (
-    <div className="m-auto" style={{ maxWidth: "500px" }}>
-      <Row>
-        <Col sm={2}>
-          <Image src={profilePic} alt="review-user-profile-picture" />
-        </Col>
-        <Col sm={10} className="align-self-center">
-          <p>{name}</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={4} className="">
-          <FiveStars />
-        </Col>
-        <Col className="" style={{ transform: "translateX(-25px)" }}>
-          <p>{date}</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <p>{review}</p>
-        </Col>
-      </Row>
+    <div className="px-2" style={{}}>
+      <div className="d-flex align-items-center">
+        <Image
+          height={50}
+          width={50}
+          src={profilePic}
+          alt="review-user-profile-picture"
+        />
+        <b>
+          <p className="ms-2 my-0">{name}</p>
+        </b>
+      </div>
+      <div className="d-flex align-items-center">
+        <FiveStars />
+        <p className="mb-2 text-muted">{date}</p>
+      </div>
+      <p>{review}</p>
     </div>
   );
 };
