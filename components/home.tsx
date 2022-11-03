@@ -16,6 +16,8 @@ import { Chart } from "react-google-charts";
 import { Section } from "./section";
 import GoogleMapReact from 'google-map-react';
 import { ImageCarousel } from "./image-carousel";
+import { sendAdminMail } from "notifications/mailproxy";
+import { NewLeadTemplate } from "notifications/templates/newlead";
 
 type LeadCache = string[];
 
@@ -45,6 +47,7 @@ export const Home = () => {
 
   async function handleNewLead(firstName: string, lastName: string, email: string, propertyKey: string) {
     console.log("Creating new lead!", firstName, lastName, email, propertyKey);
+    sendAdminMail("New Lead", <NewLeadTemplate firstName={firstName} lastName={lastName} email={email} address={propertyKey} />)
   }
 
   async function handlePageLoad() {
