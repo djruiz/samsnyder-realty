@@ -9,7 +9,8 @@ export async function sendAdminMail(
   await Axios.post("https://mailer-o6jtfuuaia-uc.a.run.app/", ReactDomServer.renderToString(body), {
     headers: {
       'x-mailer-subject': subject,
-      'x-mailer-to': '<admin>'
+      'x-mailer-to': '<admin>',
+      'content-type': 'text/plain'
     }
   });
 }
