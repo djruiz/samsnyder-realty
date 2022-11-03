@@ -6,6 +6,10 @@ const Document = () => {
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
         <title>Sam Snyder Realtor</title>
+        <script
+          src="//code.tidio.co/hdwlba6dcvr0ynexid5neye6ltmsqp6c.js"
+          async
+        ></script>
       </Head>
       <body>
         <Main />
