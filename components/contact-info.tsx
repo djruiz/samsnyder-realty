@@ -21,4 +21,4 @@ export const ContactInfo: Component = () => {
   )
 }
 
-const formGutterClasses = ["gx-2", "gy-4", "gy-md-0"].join(" ")
+const formGutterClasses = ["gx-2", "gy-2", "gy-md-0"].join(" ")
