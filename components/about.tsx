@@ -15,7 +15,7 @@ export const About: Component = () => {
         backgroundImage: "linear-gradient(135deg, #011A41, #5A77DE)",
       }}
     >
-      <div className="m-auto p-5" style={{ maxWidth: "1300px" }}>
+      <div className="m-auto py-5 px-2 px-md-5" style={{ maxWidth: "1300px" }}>
         <Row className="flex-row-reverse">
           <Col sm={12} md={{ span: 7, order: 2 }}>
             <div

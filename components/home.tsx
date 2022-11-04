@@ -253,7 +253,7 @@ export const Home = () => {
               </div>
               <div className="text-center">
                 <h1 className="font-monospace mt-4 text-primary ">Sorry, we couldn't find that property :(</h1>
-                <p>"{propertyKey}" may exist but we cannot find a record for it. <br /> If you want to try again, or search another property, go back.</p>
+                <p>&quot;{propertyKey}&quot; may exist but we cannot find a record for it. <br /> If you want to try again, or search another property, go back.</p>
                 <Link href="/">
                   <Button size="lg" className="btn-primary-gradient mt-2">Go Back</Button>
                 </Link>
@@ -278,7 +278,7 @@ export const Home = () => {
         </Col>
         <Col sm={12} md={6}>
           <div className="cta-copy my-4">
-            <h1>Let’s take the next step together!</h1>
+            <h1>Let&apos;s take the next step together!</h1>
             <p>
               Whether you are ready to sell your home, or just want to ask a few
               questions, Sam Snyder is here to help. Schedule a time on my
