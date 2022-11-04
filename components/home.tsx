@@ -2,7 +2,7 @@ import { Fullshot } from "./fullshot";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendar, faCalendarDays, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCalendarDays, faHouse, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
@@ -18,6 +18,8 @@ import GoogleMapReact from 'google-map-react';
 import { ImageCarousel } from "./image-carousel";
 import { sendAdminMail } from "notifications/mailproxy";
 import { NewLeadTemplate } from "notifications/templates/newlead";
+import { Button } from "react-bootstrap";
+import Link from "next/link";
 
 type LeadCache = string[];
 
@@ -38,6 +40,8 @@ const Marker = (_: Props) => {
 export const Home = () => {
   const [cookies, setCookie] = useCookies(["__leads"]);
   const [property, setProperty] = useState<PropertyDetailsResponse>();
+  const [propertyKey, setPropertyKey] = useState<string>();
+  const [invalid, setInvalid] = useState(false);
   const [couldNotFindProperty, setCouldNotFindProperty] = useState<boolean>(false);
   const router = useRouter();
 
@@ -55,9 +59,11 @@ export const Home = () => {
     const { firstName, lastName, email, propertyKey } = router.query as { [key: string]: string };
 
     if (!firstName || !lastName || !email || !propertyKey) {
-      setCouldNotFindProperty(true);
+      setInvalid(true);
       return;
     }
+
+    setPropertyKey(propertyKey);
 
     const leads: LeadCache = cookies.__leads || [];
 
@@ -81,7 +87,7 @@ export const Home = () => {
           }
         });
 
-        const location = locationSuggestion.data.data.find(p => p.area_type == "address");
+        const location = locationSuggestion.data.data?.find(p => p.area_type == "address");
 
         if (!location) {
           setCouldNotFindProperty(true);
@@ -95,6 +101,7 @@ export const Home = () => {
             'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com'
           }
         });
+
         properties[propertyKey] = propertyDetails.data
       } else {
         console.log("CALLING API (MOCK)");
@@ -110,6 +117,12 @@ export const Home = () => {
   useEffect(() => {
     handlePageLoad();
   }, [router.isReady, router.query])
+
+  useEffect(() => {
+    if (invalid) {
+      router.push("/")
+    }
+  }, [invalid]);
 
   return (
     <div className="pb-5 home-value-ff">
@@ -201,7 +214,7 @@ export const Home = () => {
               </div>
             </div>
           </Section>
-          <Section>
+          <Section def={[12, 12]} md={[6, 6]}>
             {property.data.property_detail.avm_history ? <div className="border border-primary mt-4 rounded shadow text-center position-relative overflow-hidden">
               <Chart
                 options={{
@@ -230,7 +243,23 @@ export const Home = () => {
             ) : <div></div>}
           </Section>
         </div> : (
-          <div className="p-5">
+          couldNotFindProperty ? (<div className="p-5">
+            <div>
+              <div className="position-relative d-flex justify-content-center w-100">
+                <div style={{ width: 275, height: 275 }} className="d-flex justify-content-center align-items-center">
+                  <FontAwesomeIcon size="5x" className="text-secondary drop-shadow position-relative" icon={faQuestion} style={{ zIndex: 3, bottom: 20 }} />
+                </div>
+                <FontAwesomeIcon size="10x" className="position-absolute text-primary drop-shadow" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }} icon={faHouse} />
+              </div>
+              <div className="text-center">
+                <h1 className="font-monospace mt-4 text-primary ">Sorry, we couldn't find that property :(</h1>
+                <p>"{propertyKey}" may exist but we cannot find a record for it. <br /> If you want to try again, or search another property, go back.</p>
+                <Link href="/">
+                  <Button size="lg" className="btn-primary-gradient mt-2">Go Back</Button>
+                </Link>
+              </div>
+            </div>
+          </div>) : <div className="p-5">
             <div>
               <div className="position-relative d-flex justify-content-center w-100">
                 <div>
