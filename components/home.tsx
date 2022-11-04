@@ -1,8 +1,8 @@
 import { Fullshot } from "./fullshot";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendar, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCalendarDays, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
@@ -114,7 +114,7 @@ export const Home = () => {
   return (
     <div className="pb-5 home-value-ff">
       <div style={{ minHeight: "100vh" }} className="esv-container px-4">
-        {property && <div className="py-4 mw-1100 m-auto">
+        {property ? <div className="py-4 mw-1100 m-auto">
           <div>
             <h1 className="text-dark">
               <b>
@@ -227,9 +227,21 @@ export const Home = () => {
                   legendToggle
                 />
               </div>
-            ) : ""}
+            ) : <div></div>}
           </Section>
-        </div>}
+        </div> : (
+          <div className="p-5">
+            <div>
+              <div className="position-relative d-flex justify-content-center w-100">
+                <div>
+                  <Spinner style={{ width: 275, height: 275 }} variant="secondary" animation="grow" />
+                </div>
+                <FontAwesomeIcon size="10x" className="position-absolute text-primary drop-shadow" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }} icon={faHouse} />
+              </div>
+              <h1 className="text-primary text-center font-monospace mt-4">Loading Property Data</h1>
+            </div>
+          </div>
+        )}
       </div>
       <Row className="mw-1100 m-auto py-5">
         <Col sm={12} md={6}>
