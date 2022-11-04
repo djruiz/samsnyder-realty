@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import content from "assets/content";
+import quote from "assets/quote.png";
+import Image from "next/image";
 
 export const About: Component = () => {
   return (
@@ -26,10 +28,13 @@ export const About: Component = () => {
               }}
             >
               <h1>About Sam</h1>
-              <h2>
-                <span style={{ fontSize: "50px" }}>&quot;</span>
-                {content.about.heading}
-              </h2>
+              <div className="d-flex">
+                <div className="me-4">
+                  <Image src={quote} alt="Quote mark" height={44} width={65} />
+                </div>
+                <h2>{content.about.heading}</h2>
+              </div>
+
               <div style={{ fontSize: 18 }}>{content.about.body}</div>
               <a>
                 <button
