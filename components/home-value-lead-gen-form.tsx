@@ -31,8 +31,8 @@ export const HomeValueLeadGenForm: Component = () => {
 
   return (
     <div>
-      <h1 style={{ fontSize: 52 }}>{content.homeValueLeadGenForm.heading}</h1>
-      <p style={{ fontSize: 18 }}>{content.homeValueLeadGenForm.subheading}</p>
+      <h1 className="display-4">{content.homeValueLeadGenForm.heading}</h1>
+      <p>{content.homeValueLeadGenForm.subheading}</p>
       <Formik validationSchema={validationSchema} initialValues={{ firstName: '', lastName: '', email: '', homeAddress: '' }} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form className="form">
