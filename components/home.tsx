@@ -150,7 +150,7 @@ export const Home = () => {
               </div>
             </Col>
             <Col sm={12} md={{ span: 6 }}>
-              <div className="position-relative esv-data rounded shadow mb-5 overflow-hidden" style={{ paddingBottom: 30 }}>
+              <div className="position-relative esv-data rounded shadow mb-5 overflow-hidden mt-4 mt-md-0" style={{ paddingBottom: 30 }}>
                 <div className="p-4">
                   <h1 className="esv-value fs-2">Estimated Property Value</h1>
                   <hr />
