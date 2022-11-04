@@ -21,8 +21,8 @@ export const GoogleReview: Component<Props> = ({
     <div className="px-2" style={{}}>
       <div className="d-flex align-items-center">
         <Image
-          height={50}
-          width={50}
+          height={35}
+          width={35}
           src={profilePic}
           alt="review-user-profile-picture"
         />

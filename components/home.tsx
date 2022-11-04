@@ -252,7 +252,7 @@ export const Home = () => {
                 <FontAwesomeIcon size="10x" className="position-absolute text-primary drop-shadow" style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }} icon={faHouse} />
               </div>
               <div className="text-center">
-                <h1 className="font-monospace mt-4 text-primary ">Sorry, we couldn't find that property :(</h1>
+                <h1 className="font-monospace mt-4 text-primary ">Sorry, we couldn&apos;t find that property :(</h1>
                 <p>&quot;{propertyKey}&quot; may exist but we cannot find a record for it. <br /> If you want to try again, or search another property, go back.</p>
                 <Link href="/">
                   <Button size="lg" className="btn-primary-gradient mt-2">Go Back</Button>
