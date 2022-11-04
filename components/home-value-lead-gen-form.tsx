@@ -32,7 +32,7 @@ export const HomeValueLeadGenForm: Component = () => {
   return (
     <div>
       <h1 className="display-4">{content.homeValueLeadGenForm.heading}</h1>
-      <p>{content.homeValueLeadGenForm.subheading}</p>
+      <p className="fs-5">{content.homeValueLeadGenForm.subheading}</p>
       <Formik validationSchema={validationSchema} initialValues={{ firstName: '', lastName: '', email: '', homeAddress: '' }} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form className="form">
