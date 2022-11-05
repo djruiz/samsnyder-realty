@@ -42,7 +42,7 @@ export const HomeValueLeadGenForm: Component = () => {
             <div>
               <div className="mb-4">
                 <ContactInfo />
-                {googleMapsScriptReady && <Address />}
+                <Address />
               </div>
               <div className="mx-md-5 mb-3">
                 <Button disabled={isSubmitting} type="submit" style={{ zIndex: 1 }} className='font-monospace position-relative btn btn-primary btn-gradient-primary btn-lg w-100 shadow'>

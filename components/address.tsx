@@ -33,7 +33,9 @@ export const Address: Component<Props> = () => {
   });
 
   useEffect(() => {
-    init()
+    if (googleMapsScriptReady) {
+      init()
+    }
   }, [googleMapsScriptReady])
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
