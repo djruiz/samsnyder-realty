@@ -42,7 +42,7 @@ export const HomeValueLeadGenForm: Component = () => {
                 <Address />
               </div>
               <div className="mx-md-5 mb-3">
-                <Button disabled={isSubmitting} type="submit" style={{ zIndex: 1 }} className='position-relative btn btn-primary btn-gradient-primary btn-lg w-100 shadow'>
+                <Button disabled={isSubmitting} type="submit" style={{ zIndex: 1 }} className='font-monospace position-relative btn btn-primary btn-gradient-primary btn-lg w-100 shadow'>
                   {content.homeValueLeadGenForm.callToAction}
                 </Button>
               </div>

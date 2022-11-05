@@ -38,6 +38,7 @@ export const About: Component = () => {
               }}
             >
               <h1>About Sam</h1>
+              <hr />
               <div className="d-flex">
                 <div className="me-4">
                   <Image src={quote} alt="Quote mark" height={44} width={65} />
