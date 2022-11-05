@@ -20,6 +20,7 @@ import { sendAdminMail } from "notifications/mailproxy";
 import { NewLeadTemplate } from "notifications/templates/newlead";
 import { Button } from "react-bootstrap";
 import Link from "next/link";
+import { PopupButton } from "react-calendly";
 
 type LeadCache = string[];
 
@@ -44,6 +45,13 @@ export const Home = () => {
   const [invalid, setInvalid] = useState(false);
   const [couldNotFindProperty, setCouldNotFindProperty] = useState<boolean>(false);
   const router = useRouter();
+  const [root, setRoot] = useState<HTMLDivElement>();
+
+  useEffect(() => {
+    const root = document.getElementById("root") as HTMLDivElement;
+    setRoot(root)
+  }, [])
+
 
   function numberWithCommas(x: number) {
     return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -285,16 +293,12 @@ export const Home = () => {
               calendar and I will talk you through how we can turn your dream
               into a reality.
             </p>
-            <button
-              style={{ width: "100%" }}
-              className="btn btn-primary btn-gradient-primary btn-lg px-5 shadow"
-            >
-              <FontAwesomeIcon
-                className="pe-2"
-                icon={faCalendarDays as IconProp}
-              />
-              Schedule A Chat
-            </button>
+            {root && <PopupButton
+              url="https://calendly.com/swilliamsnyder/letschat"
+              rootElement={root}
+              text="Schedule a Chat"
+              className="btn btn-primary font-monospace shadow px-3 py-2 rounded"
+            />}
           </div>
         </Col>
       </Row>

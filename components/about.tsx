@@ -7,8 +7,18 @@ import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import content from "assets/content";
 import quote from "assets/quote.png";
 import Image from "next/image";
+import Link from "next/link";
+import { PopupButton } from "react-calendly";
+import { useEffect, useState } from "react";
 
 export const About: Component = () => {
+  const [root, setRoot] = useState<HTMLDivElement>();
+
+  useEffect(() => {
+    const root = document.getElementById("root") as HTMLDivElement;
+    setRoot(root)
+  }, [])
+
   return (
     <div
       style={{
@@ -16,8 +26,8 @@ export const About: Component = () => {
       }}
     >
       <div className="m-auto py-5 px-2 px-md-5" style={{ maxWidth: "1300px" }}>
-        <Row className="flex-row-reverse">
-          <Col sm={12} md={{ span: 7, order: 2 }}>
+        <Row className="flex-row-reverse m-0">
+          <Col className="p-0" sm={12} md={{ span: 7, order: 2 }}>
             <div
               className="p-4 m-4 rounded shadow"
               style={{
@@ -36,32 +46,23 @@ export const About: Component = () => {
               </div>
 
               <div style={{ fontSize: 18 }}>{content.about.body}</div>
-              <a>
-                <button
-                  className="px-3 py-2 rounded"
-                  style={{
-                    backgroundColor: "white",
-                    borderRadius: "5%",
-                    color: "#D88C74",
-                    border: "none",
-                    fontSize: 20,
-                  }}
-                >
-                  <FontAwesomeIcon
-                    className="pe-2"
-                    icon={faCalendarDays as IconProp}
-                  />{" "}
-                  Schedule a Chat
-                </button>
-              </a>
+              <div>
+                {root && <PopupButton
+                  url="https://calendly.com/swilliamsnyder/letschat"
+                  rootElement={root}
+                  text="Schedule a Chat"
+                  className="btn btn-primary font-monospace shadow px-3 py-2 rounded"
+                />}
+              </div>
             </div>
           </Col>
           <Col
+            className="p-0"
             sm={12}
             md={{ span: 5, order: 1 }}
             style={{ alignSelf: "center" }}
           >
-            <div className="m-4">
+            <div className="mx-0 mx-md-5">
               <InstagramEmbed
                 url={"https://www.instagram.com/yourlocalexpertsam/"}
                 width={"100%"}

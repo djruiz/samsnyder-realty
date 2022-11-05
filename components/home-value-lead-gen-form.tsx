@@ -31,8 +31,8 @@ export const HomeValueLeadGenForm: Component = () => {
 
   return (
     <div>
-      <h1 className="display-4">{content.homeValueLeadGenForm.heading}</h1>
-      <p className="fs-5">{content.homeValueLeadGenForm.subheading}</p>
+      <h1 className="display-5">{content.homeValueLeadGenForm.heading}</h1>
+      <p className="fs-5 mb-3">{content.homeValueLeadGenForm.subheading}</p>
       <Formik validationSchema={validationSchema} initialValues={{ firstName: '', lastName: '', email: '', homeAddress: '' }} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form className="form">
@@ -41,9 +41,11 @@ export const HomeValueLeadGenForm: Component = () => {
                 <ContactInfo />
                 <Address />
               </div>
-              <Button disabled={isSubmitting} type="submit" style={{ zIndex: 1 }} className='position-relative btn btn-primary btn-gradient-primary btn-lg px-5 shadow'>
-                {content.homeValueLeadGenForm.callToAction}
-              </Button>
+              <div className="mx-md-5 mb-3">
+                <Button disabled={isSubmitting} type="submit" style={{ zIndex: 1 }} className='position-relative btn btn-primary btn-gradient-primary btn-lg w-100 shadow'>
+                  {content.homeValueLeadGenForm.callToAction}
+                </Button>
+              </div>
             </div>
           </Form>
         )}

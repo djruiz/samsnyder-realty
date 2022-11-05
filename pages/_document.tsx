@@ -13,6 +13,7 @@ const Document = () => {
       </Head>
       <body>
         <Main />
+        <div id="root"></div>
         <NextScript />
       </body>
     </Html>
