@@ -1,8 +1,7 @@
 import { Fullshot } from "./fullshot";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendar, faCalendarDays, faHouse, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faHouse, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
