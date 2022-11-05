@@ -1,17 +1,15 @@
 import { Row, Col } from "react-bootstrap";
 import { Component } from "types/component";
-import { InstagramEmbed } from "react-social-media-embed";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import content from "assets/content";
-import quote from "assets/quote.png";
+import quote from "assets/quote.webp";
 import Image from "next/image";
-import Link from "next/link";
 import { PopupButton } from "react-calendly";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+const InstagramEmbed = dynamic(import('react-social-media-embed').then(mod => mod.InstagramEmbed), { ssr: false })
 
 export const About: Component = () => {
+  const instaEmbedRef = useRef<HTMLDivElement>(null);
   const [root, setRoot] = useState<HTMLDivElement>();
 
   useEffect(() => {
@@ -63,7 +61,7 @@ export const About: Component = () => {
             md={{ span: 5, order: 1 }}
             style={{ alignSelf: "center" }}
           >
-            <div className="mx-0 mx-md-5">
+            <div ref={instaEmbedRef} className="mx-0 mx-md-5">
               <InstagramEmbed
                 url={"https://www.instagram.com/yourlocalexpertsam/"}
                 width={"100%"}

@@ -61,7 +61,7 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
       <div>
         <Spinner variant="primary" animation="border" />
       </div>
-      <Image layout="fill" objectFit="cover" src={current} />
+      <Image layout="fill" objectFit="cover" src={current} alt="Current Home Image" />
       <div style={{ bottom: 25 }} className="d-flex position-absolute">
         {imagePreviews.map((src, i) => (
           src == undefined ? <span></span> : <div
@@ -71,7 +71,7 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
             <div className="position-absolute" style={{ transform: "translate(-50%, -50%)", left: "50%", top: "50%" }}>
               <Spinner size="sm" variant="primary" animation="border" />
             </div>
-            <Image className="position-absolute" width={50} height={50} objectFit="cover" src={src} />
+            <Image alt="Preview Image" className="position-absolute" width={50} height={50} objectFit="cover" src={src} />
           </div>
         ))}
       </div>

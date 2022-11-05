@@ -18,6 +18,9 @@ const Home: NextPage = () => {
     <Page>
       <Head>
         <title>Sam Snyder Realtor</title>
+        <meta name="description" content="Sam Snyder is an expert realtor from Fort Wayne, IN. He's been through thousands of homes and hundreds of real estate transactions. He simplifies the home buying process and has systems that avoid aheadaches and get the client the best deal possible." />
+        <meta name="keywords" content="Fort Wayne Realtor, Sam Snyder Realtor" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Headline>
         <Section def={[12, 12]} md={[5, 7]} classNames={[headshotColClasses]}>

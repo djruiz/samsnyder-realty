@@ -20,7 +20,11 @@ $theme-colors: (
 }
 
 .drop-shadow {
-  filter: drop-shadow(0 0 2px #000000A0);
+  filter: drop-shadow(0 0 1px #000000A0);
+}
+
+.drop-shadow-sm {
+  filter: drop-shadow(1px 1px 1px #0000002d);
 }
 
 .home-value-ff {

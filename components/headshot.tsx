@@ -1,11 +1,11 @@
 import { Component } from "types/component";
 import Image from "next/image";
-import HeadshotImage from "assets/headshot.png";
+import HeadshotImage from "assets/headshot.webp";
 
 export const Headshot: Component = () => {
   return (
     <div className='drop-shadow position-relative' style={{ bottom: "-10px", zIndex: 0 }}>
-      <Image width={411} height={402} src={HeadshotImage} />
+      <Image alt="Sam Snyder Headshot" width={722} height={706} src={HeadshotImage} />
     </div>
   )
 }

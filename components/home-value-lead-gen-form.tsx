@@ -6,6 +6,8 @@ import { Address } from "./address"
 import { ContactInfo } from "./contact-info"
 import { object, string } from "yup"
 import { useRouter } from "next/router"
+import { useContext } from "react"
+import { ScriptContext } from "contexts/script-context"
 
 interface Schema {
   email: string,
@@ -23,6 +25,7 @@ const validationSchema = object({
 
 export const HomeValueLeadGenForm: Component = () => {
   const router = useRouter();
+  const { googleMapsScriptReady } = useContext(ScriptContext);
 
   function handleSubmit({ email, firstName, lastName, homeAddress }: Schema) {
     const url = `/home-value?email=${email}&firstName=${firstName}&lastName=${lastName}&propertyKey=${homeAddress}`;
@@ -39,7 +42,7 @@ export const HomeValueLeadGenForm: Component = () => {
             <div>
               <div className="mb-4">
                 <ContactInfo />
-                <Address />
+                {googleMapsScriptReady && <Address />}
               </div>
               <div className="mx-md-5 mb-3">
                 <Button disabled={isSubmitting} type="submit" style={{ zIndex: 1 }} className='font-monospace position-relative btn btn-primary btn-gradient-primary btn-lg w-100 shadow'>

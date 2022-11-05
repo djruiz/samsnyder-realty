@@ -1,5 +1,5 @@
 import { Component } from "types/component";
-import FortWayneImage from "assets/fort-wayne.png";
+import FortWayneImage from "assets/fort-wayne.webp";
 
 export const Headline: Component = ({ children }) => {
   return (

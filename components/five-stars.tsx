@@ -1,10 +1,10 @@
-import Image from "next/image";
-import FiveStarsImage from "assets/five-stars.png";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const FiveStars = () => {
   return (
-    <div>
-      <Image width={120} height={31} src={FiveStarsImage} />
+    <div className="d-flex drop-shadow-sm">
+      {Array.from({ length: 5 }).map((_, i) => <FontAwesomeIcon key={i} icon={faStar} style={{ color: "gold" }} />)}
     </div>
   )
 }
