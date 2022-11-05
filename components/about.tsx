@@ -12,9 +12,22 @@ export const About: Component = () => {
   const instaEmbedRef = useRef<HTMLDivElement>(null);
   const [root, setRoot] = useState<HTMLDivElement>();
 
+  function tryAddIframeTitle(i = 0) {
+    const iframe = instaEmbedRef.current?.querySelector("iframe");
+    if (iframe) {
+      iframe.setAttribute("title", "Instagram embed")
+    } else {
+      if (i == 10) {
+        return;
+      }
+      setTimeout(() => tryAddIframeTitle(i + 1), 500)
+    }
+  }
+
   useEffect(() => {
     const root = document.getElementById("root") as HTMLDivElement;
     setRoot(root)
+    tryAddIframeTitle()
   }, [])
 
   return (
