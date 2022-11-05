@@ -75,7 +75,6 @@ export const Address: Component<Props> = () => {
         className="form-control my-2"
         value={value}
         onChange={handleInput}
-        disabled={!ready}
         placeholder="Home Address"
       />
       <ErrorMessage name="homeAddress" className="text-danger" component="small" />
