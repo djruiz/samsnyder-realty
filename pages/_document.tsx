@@ -1,14 +1,11 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { useEffect } from "react";
 
 const Document = () => {
   return (
     <Html lang="en">
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
-        <script
-          src="//code.tidio.co/hdwlba6dcvr0ynexid5neye6ltmsqp6c.js"
-          async
-        ></script>
       </Head>
       <body>
         <Main />

@@ -8,7 +8,7 @@ export const Fullshot: Component = () => {
     <div className='drop-shadow mx-4 position-relative'>
       <BackgroundCircle />
       <div style={{ maxWidth: 400, margin: "auto" }}>
-        <Image alt="Sam Snyder Standing" width={782} height={956} src={FullshotImage} />
+        <Image sizes="(max-width: 768px) 400px" alt="Sam Snyder Standing" width={782} height={956} src={FullshotImage} />
       </div>
     </div>
   )
