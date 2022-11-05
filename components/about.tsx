@@ -25,11 +25,11 @@ export const About: Component = () => {
         backgroundImage: "linear-gradient(135deg, #011A41, #5A77DE)",
       }}
     >
-      <div className="m-auto py-5 px-2 px-md-5" style={{ maxWidth: "1300px" }}>
+      <div className="m-auto py-3 py-md-5 px-2 px-md-5" style={{ maxWidth: "1300px" }}>
         <Row className="flex-row-reverse m-0">
           <Col className="p-0" sm={12} md={{ span: 7, order: 2 }}>
             <div
-              className="p-4 m-4 rounded shadow"
+              className="p-4 mb-3 me-md-5 rounded shadow"
               style={{
                 color: "#fff",
                 backgroundImage:

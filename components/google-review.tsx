@@ -18,7 +18,7 @@ export const GoogleReview: Component<Props> = ({
   review,
 }) => {
   return (
-    <div className="px-2" style={{}}>
+    <div className="px-2 mb-4" style={{}}>
       <div className="d-flex align-items-center">
         <Image
           height={35}
