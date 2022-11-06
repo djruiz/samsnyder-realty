@@ -23,8 +23,10 @@ const nextConfig = {
   ) => {
     config.plugins.push({
       apply(compiler) {
-        compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {
-          exec('ts-node -P scripts/tsconfig.json scripts/create-webp-fallbacks.ts')
+        compiler.hooks.afterEmit.tapAsync('AfterEmitPlugin', (compilation, callback) => {
+          exec('ts-node -P scripts/tsconfig.json scripts/create-webp-fallbacks.ts', () => {
+            callback();
+          })
         })
       }
     })
