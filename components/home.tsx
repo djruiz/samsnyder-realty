@@ -83,7 +83,7 @@ export const Home = () => {
     }
 
     if (!properties[propertyKey]) {
-      if (process.env.NODE_ENV == "production") {
+      if (process.env.NODE_ENV == "development") {
         console.log("CALLING API");
 
         const locationSuggestion = await Axios.get<LocationSuggestionResponse>("https://us-real-estate.p.rapidapi.com/location/suggest", {
@@ -122,12 +122,10 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    try {
-      handlePageLoad();
-    } catch {
+    handlePageLoad().catch(() => {
       setProperty(undefined);
       setCouldNotFindProperty(true);
-    }
+    })
   }, [router.isReady, router.query])
 
   useEffect(() => {
