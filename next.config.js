@@ -24,7 +24,10 @@ const nextConfig = {
     config.plugins.push({
       apply(compiler) {
         compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {
-          exec('ts-node -P scripts/tsconfig.json scripts/create-webp-fallbacks')
+          console.log("Running custom plugin")
+          exec('ts-node -P scripts/tsconfig.json scripts/create-webp-fallbacks', (err) => {
+            console.log(error)
+          })
         })
       }
     })
