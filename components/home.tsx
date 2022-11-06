@@ -3,7 +3,6 @@ import { Col, Row, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faHouse, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import Axios from "axios";
 import { PropertyDetailsResponse } from "types/property-details-response";
@@ -15,13 +14,9 @@ import { Chart } from "react-google-charts";
 import { Section } from "./section";
 import GoogleMapReact from 'google-map-react';
 import { ImageCarousel } from "./image-carousel";
-import { sendAdminMail } from "notifications/mailproxy";
-import { NewLeadTemplate } from "notifications/templates/newlead";
 import { Button } from "react-bootstrap";
 import Link from "next/link";
 import { PopupButton } from "react-calendly";
-
-type LeadCache = string[];
 
 interface Props {
   lat: number,
@@ -38,7 +33,6 @@ const Marker = (_: Props) => {
 }
 
 export const Home = () => {
-  const [cookies, setCookie] = useCookies(["__leads"]);
   const [property, setProperty] = useState<PropertyDetailsResponse>();
   const [propertyKey, setPropertyKey] = useState<string>();
   const [invalid, setInvalid] = useState(false);
@@ -56,11 +50,6 @@ export const Home = () => {
     return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  async function handleNewLead(firstName: string, lastName: string, email: string, propertyKey: string) {
-    console.log("Creating new lead!", firstName, lastName, email, propertyKey);
-    sendAdminMail("New Lead", <NewLeadTemplate firstName={firstName} lastName={lastName} email={email} address={propertyKey} />)
-  }
-
   async function handlePageLoad() {
     if (!router.isReady) return;
     const { firstName, lastName, email, propertyKey } = router.query as { [key: string]: string };
@@ -72,15 +61,9 @@ export const Home = () => {
 
     setPropertyKey(propertyKey);
 
-    const leads: LeadCache = cookies.__leads || [];
 
     const propertiesCache = localStorage.getItem("__properties");
     const properties = propertiesCache ? JSON.parse(propertiesCache) : {};
-
-    if (!leads.includes(email)) {
-      leads.push(email)
-      handleNewLead(firstName, lastName, email, propertyKey);
-    }
 
     if (!properties[propertyKey]) {
       if (process.env.NODE_ENV == "development") {
@@ -116,7 +99,6 @@ export const Home = () => {
       }
     }
 
-    setCookie("__leads", leads, { path: "/" });
     localStorage.setItem("__properties", JSON.stringify(properties));
     setProperty(properties[propertyKey]);
   }

@@ -6,8 +6,9 @@ import { Address } from "./address"
 import { ContactInfo } from "./contact-info"
 import { object, string } from "yup"
 import { useRouter } from "next/router"
-import { useContext } from "react"
-import { ScriptContext } from "contexts/script-context"
+import { useCookies } from "react-cookie"
+import { sendAdminMail } from "notifications/mailproxy"
+import { NewLeadTemplate } from "notifications/templates/newlead";
 
 interface Schema {
   email: string,
@@ -23,11 +24,27 @@ const validationSchema = object({
   homeAddress: string().label("Home Address").required("Required")
 });
 
+type LeadCache = string[];
+
 export const HomeValueLeadGenForm: Component = () => {
   const router = useRouter();
-  const { googleMapsScriptReady } = useContext(ScriptContext);
+  const [cookies, setCookie] = useCookies(["__leads"]);
+
+  async function handleNewLead(firstName: string, lastName: string, email: string, propertyKey: string) {
+    console.log("Creating new lead!", firstName, lastName, email, propertyKey);
+    sendAdminMail("New Lead", <NewLeadTemplate firstName={firstName} lastName={lastName} email={email} address={propertyKey} />)
+  }
 
   function handleSubmit({ email, firstName, lastName, homeAddress }: Schema) {
+    const leads: LeadCache = cookies.__leads || [];
+
+    if (!leads.includes(email)) {
+      leads.push(email)
+      handleNewLead(firstName, lastName, email, homeAddress);
+    }
+
+    setCookie("__leads", leads, { path: "/" });
+
     const url = `/home-value?email=${email}&firstName=${firstName}&lastName=${lastName}&propertyKey=${homeAddress}`;
     router.push(url);
   }
