@@ -122,7 +122,12 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    handlePageLoad();
+    try {
+      handlePageLoad();
+    } catch {
+      setProperty(undefined);
+      setCouldNotFindProperty(true);
+    }
   }, [router.isReady, router.query])
 
   useEffect(() => {
