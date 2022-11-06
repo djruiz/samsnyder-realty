@@ -2,10 +2,10 @@ import { Row, Col } from "react-bootstrap";
 import { Component } from "types/component";
 import content from "assets/content";
 import quote from "assets/quote.webp";
-import Image from "next/image";
 import { PopupButton } from "react-calendly";
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { NextGenImage } from "./next-gen-image";
 const InstagramEmbed = dynamic(import('react-social-media-embed').then(mod => mod.InstagramEmbed), { ssr: false })
 
 export const About: Component = () => {
@@ -52,7 +52,7 @@ export const About: Component = () => {
               <hr />
               <div className="d-flex">
                 <div className="me-4">
-                  <Image src={quote} alt="Quote mark" height={44} width={65} />
+                  <NextGenImage src={quote} alt="Quote mark" height={44} width={65} />
                 </div>
                 <h2>{content.about.heading}</h2>
               </div>
