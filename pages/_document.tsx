@@ -4,7 +4,7 @@ const Document = () => {
   return (
     <Html lang="en">
       <Head>
-        <link rel="shortcut icon" href={process.env.NEXT_PUBLIC_BASE_PATH + "/favicon.png"} />
+        <link rel="shortcut icon" href={process.env.NEXT_PUBLIC_BASE_PATH + "/favicon.ico"} />
       </Head>
       <body>
         <Main />
