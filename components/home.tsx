@@ -66,7 +66,7 @@ export const Home = () => {
     const properties = propertiesCache ? JSON.parse(propertiesCache) : {};
 
     if (!properties[propertyKey]) {
-      if (process.env.NODE_ENV == "development") {
+      if (process.env.NEXT_PUBLIC_NODE_ENV == "production") {
         console.log("CALLING API");
 
         const locationSuggestion = await Axios.get<LocationSuggestionResponse>("https://us-real-estate.p.rapidapi.com/location/suggest", {
