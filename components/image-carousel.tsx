@@ -64,7 +64,7 @@ export const ImageCarousel: Component<Props> = ({ images }) => {
       <Image layout="fill" objectFit="cover" src={current} alt="Current Home Image" />
       <div style={{ bottom: 25 }} className="d-flex position-absolute">
         {imagePreviews.map((src, i) => (
-          src == undefined ? <span></span> : <div
+          src == undefined ? <span key={i}></span> : <div
             key={src}
             style={{ width: 50, height: 50, backgroundColor: "#ccc" }}
             className={"rounded shadow overflow-hidden mx-1 position-relative " + (i == 2 ? "border border-primary" : " border border-secondary")}>
